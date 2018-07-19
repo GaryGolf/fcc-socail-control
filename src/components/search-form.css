@@ -1,3 +1,12 @@
 .container {
-  margin: 100px auto;
+}
+
+.form {
+  width: auto;
+  padding: 3rem 4rem;
+  white-space: nowrap;
+}
+
+.input {
+  width: 300px;
 }

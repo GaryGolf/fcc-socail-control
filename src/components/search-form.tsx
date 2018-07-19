@@ -1,12 +1,15 @@
 import * as React from 'react';
 import * as styles from './search-form.css';
 
-interface Props {}
+interface Props {
+  onSubmit:(url:string) => void;
+}
 interface State {
   url: string;
 }
 
 export default class SearchForm extends React.PureComponent<Props, State> {
+  
   constructor(props:Props) {
     super(props)
     this.state = { url: '' };
@@ -25,8 +28,9 @@ export default class SearchForm extends React.PureComponent<Props, State> {
   render() {
     return (
       <div className={styles.container}>
-        <form onSubmit={this.handleFormSubmit}>
+        <form className={styles.form} onSubmit={this.handleFormSubmit}>
           <input
+            className={styles.input}
             type="text"
             value={this.state.url}
             onChange={this.handleInputChange}
