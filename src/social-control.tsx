@@ -1,6 +1,7 @@
 import * as React from 'react';
-import Fetch from './components/fetch'
+// import Fetch from './components/fetch'
 // import * as styles from './index.css';
+import SearchForm from './components/search-form';
 
 
 interface Props {}
@@ -11,11 +12,11 @@ export default class SocialControl extends React.PureComponent<Props, {}> {
 
     return (
       <div>
-        <div>Hello</div>
-        <Fetch 
+        <SearchForm/>
+        {/* <Fetch 
           url="https://google.com"
           getResponse={console.log}
-        />
+        /> */}
       </div>
     )
   }
