@@ -1,0 +1,39 @@
+{
+  "name": "socail-control",
+  "version": "1.0.0",
+  "description": "extract user data from social network",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaryGolf/fcc-socail-control.git"
+  },
+  "keywords": [
+    "socail",
+    "control"
+  ],
+  "author": "GaryGolf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GaryGolf/fcc-socail-control/issues"
+  },
+  "homepage": "https://github.com/GaryGolf/fcc-socail-control#readme",
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
+    "awesome-typescript-loader": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.21.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
