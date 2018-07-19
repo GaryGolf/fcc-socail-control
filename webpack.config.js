@@ -1,12 +1,18 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const options = {
-    module: true,
+const cssLoaderQuery = {
+    modules: true,
     sourceMap: true,
+    importLoaders: 1,
     localIdentName: '[local]__[hash:base64:5]'
   };
+
+const extractTextPluginOptions = {
+  fallback: 'style-loader', use: [{ loader: 'css-loader', query: cssLoaderQuery }]
+}
 
 const devCilentConfig = {
   mode: 'development',
@@ -32,11 +38,12 @@ const devCilentConfig = {
   module: {
     rules: [
       { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
-      { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader', options }] }
+      { test: /\.css$/, use: ExtractTextPlugin.extract(extractTextPluginOptions) }
     ]
   },
 
   plugins: [
+    new ExtractTextPlugin({ filename: 'styles.css' }),
     new HtmlWebpackPlugin({ template: path.join(__dirname, './src/index.html') }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
