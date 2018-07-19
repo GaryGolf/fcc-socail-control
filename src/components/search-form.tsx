@@ -22,7 +22,7 @@ export default class SearchForm extends React.PureComponent<Props, State> {
   
   private handleFormSubmit = (event:React.FormEvent) => {
     event.preventDefault();
-    console.log('url:', this.state.url)
+    this.props.onSubmit(this.state.url);
   }
 
   render() {
