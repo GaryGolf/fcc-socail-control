@@ -8,7 +8,7 @@ interface Props {
 const UserPage:React.SFC<Props>  = ({ html }) => {
 
   if (!html) return null;
-  
+
   const handleClick = (event:React.MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
   return (
