@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Info from './info';
+import * as styles from './user-info.css';
 
 interface Props {
   info: any;
@@ -13,7 +14,7 @@ export default class UserInfo extends React.PureComponent<Props, null> {
     if (!info) return null;
 
     return (
-      <div className="">
+      <div className={styles.container}>
         <Info.Airbnb info={info}/>
       </div>
     )

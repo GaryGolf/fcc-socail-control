@@ -9,6 +9,15 @@
   background: rgba(255, 255, 255, 0.781);
   box-shadow: 0 0 14px white;
   width: auto;
-  padding: 3rem 4rem;
+  padding: 2rem 4rem;
   white-space: nowrap;
+}
+
+.confirm {
+  float: right;
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
 }
