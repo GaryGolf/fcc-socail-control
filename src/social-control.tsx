@@ -41,14 +41,10 @@ export default class SocialControl extends React.PureComponent<Props, State> {
     const { extractor } = config[network];
     const xml = parser.parseFromString(html, 'text/html');
 
-    return Object.keys(extractor)
-      .reduce((acc, key) => { 
+    return Object.keys(extractor).reduce((acc, key) => { 
         let value = '...';
-        try {
-          value = extractor[key](xml);
-        } catch(error) {
-          console.log(error)
-        }
+        try { value = extractor[key](xml) } 
+        catch(error) { console.log(error) }
         return { ...acc, [key]:value }
       }, { network });
   }
@@ -72,7 +68,6 @@ export default class SocialControl extends React.PureComponent<Props, State> {
         this.setState({ message: 'error' });
       })
   }
-
 
   render() {
     const { html, message } = this.state;
