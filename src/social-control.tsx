@@ -6,6 +6,7 @@ import UserPage from './components/user-page';
 import { config } from './config';
 
 import * as styles from './social-control.css';
+import { encode } from 'punycode';
 
 
 interface Props {}
@@ -14,16 +15,33 @@ interface State {
   message: string;
 }
 
+declare interface RequestInit {
+  mode: RequestMode | string;
+}
+
 export default class SocialControl extends React.PureComponent<Props, State> {
 
   private parser:DOMParser;
   private network:string;
+  private info: any;
 
   constructor(props:Props) {
     super(props)
 
     this.parser = new DOMParser();
     this.state = { html: '' , message: null };
+  }
+
+  private sendUserInfo = () => {
+    const options = { 
+      method: 'POST', 
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" ,
+        'Access-Control-Allow-Origin':'*' 
+      },
+      body: this.info 
+    };
+    fetch('https://imaginary.com/imaginary', options).then(console.log);
   }
 
   private getNetwork = (url:string):string => {
@@ -71,17 +89,17 @@ export default class SocialControl extends React.PureComponent<Props, State> {
 
   render() {
     const { html, message } = this.state;
-    const info = this.extractUserInfo(html);
+    this.info = this.extractUserInfo(html);
     const wait = message == '...loading';
-    const btnStyle = [ styles.confirm , !info ? styles.hidden : ''].join(' ');
+    const btnStyle = [ styles.confirm , !this.info ? styles.hidden : ''].join(' ');
     return (
       <div className={styles.container}>
         <h1 style={{position: 'fixed', margin:'3rem', bottom:0, right:0}}>{message}</h1>
         <UserPage html={html}/>
         <div className={styles.plate}>
           <SearchForm wait={wait} onSubmit={this.handleFormSubmit}/>
-          <UserInfo info={info}/>
-          <button className={btnStyle}>
+          <UserInfo info={this.info}/>
+          <button className={btnStyle} onClick={this.sendUserInfo}>
             I confirm this is my account
           </button>
         </div>
