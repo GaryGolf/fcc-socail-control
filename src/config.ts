@@ -1,6 +1,6 @@
 export const config = {
   airbnb: {
-    hosts: ['www.airbnb.com.au'],
+    hosts: ['www.airbnb.com.au', 'www.airbnb.com'],
     extractor: {
       reviews: xml =>  xml.querySelector('#undefined_count').firstChild.textContent,
       name: xml => {
@@ -25,7 +25,33 @@ export const config = {
         
         return labels.join(', ')
       }
-      
+    }
+  },
+  
+  ebay: {
+    hosts: ['www.ebay.com.au', 'www.ebay.com'],
+    extractor: {
+      name: xml => xml.querySelector('#user_info')
+          .querySelector('a.mbg-id').lastChild.textContent.trim(),
+      feedback: xml => { 
+        const fb = xml.querySelector('#user_info')
+          .querySelector('a[title]').lastChild.textContent.trim()
+        return `(${fb})`
+      },
+      positive: xml => xml.querySelector('#user_info')
+          .querySelector('div.perctg').textContent.trim(),
+      rating: xml => { 
+        const positive = xml.querySelector('#feedback_ratings')
+          .querySelector('a[title=Positive]')
+          .querySelector('span.num').textContent.trim();
+        const neutral = xml.querySelector('#feedback_ratings')
+          .querySelector('a[title=Neutral]')
+          .querySelector('span.num').textContent.trim();
+        const negative = xml.querySelector('#feedback_ratings')
+          .querySelector('a[title=Negative]')
+          .querySelector('span.num').textContent.trim();
+        return `positive ${positive}  neutral ${neutral}  negative ${negative}`
+      }
     }
   }
 };
