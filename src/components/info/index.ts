@@ -1,3 +1,4 @@
 import Airbnb from './airbnb'
+import Ebay from './ebay'
 
-export default { Airbnb };
+export default { Airbnb, Ebay };

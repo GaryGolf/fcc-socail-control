@@ -13,7 +13,7 @@ export default class SearchForm extends React.PureComponent<Props, State> {
   
   constructor(props:Props) {
     super(props)
-    this.state = { url: 'https://www.airbnb.com.au/users/show/99824610' };
+    this.state = { url: 'https://www.ebay.com.au/usr/twiz911' };
   }
 
   private handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
