@@ -4,7 +4,7 @@
   "description": "extract user data from social network",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server",
+    "start": "NODE_ENV=development webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
