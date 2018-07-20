@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Fetch from './fetch';
 import UserPage from './user-page';
-import * as URL from 'url-parse';
-import { access } from 'fs';
 
 interface Props {
   url: string;
@@ -15,12 +13,12 @@ const config = {
   airbnb: {
     hosts: ['www.airbnb.com.au'],
     extractor: {
-      reviews: xml =>  xml.querySelector('#undefined_count').firstChild.textContent
-      // name: xml => {
-      //   const title = xml.querySelector('title').textContent;
-      //   const end = title.indexOf('\'');
-      //   return title.substring(0, end);
-      // }
+      reviews: xml =>  xml.querySelector('#undefined_count').firstChild.textContent,
+      name: xml => {
+        const title = xml.querySelector('title').textContent;
+        const end = title.indexOf('\'');
+        return title.substring(0, end);
+      }
       
     }
   }
@@ -54,7 +52,7 @@ export default class UserInfo extends React.PureComponent<Props, State> {
     const xml = this.parser.parseFromString(html, 'text/html');
 
     return Object.keys(extractor)
-      .reduce((acc, key) => ({ ...acc, [key]:extractor[key](xml) }), {})
+      .reduce((acc, key) => ({ ...acc, [key]:extractor[key](xml) }), { network });
   }
 
   render() {
