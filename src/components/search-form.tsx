@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as styles from './search-form.css';
 
 interface Props {
-  wait: boolean;
+  disabled: boolean;
   onSubmit:(url:string) => void;
 }
 interface State {
@@ -27,17 +27,17 @@ export default class SearchForm extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { wait } =this.props;
+    const { disabled } =this.props;
     return (
       <form className={styles.form} onSubmit={this.handleFormSubmit}>
         <input
           className={styles.input}
           //type="text"
-          disabled={wait}
+          disabled={disabled}
           value={this.state.url}
           onChange={this.handleInputChange}
         />
-        <input type="submit" disabled={wait}/> 
+        <input type="submit" disabled={disabled}/> 
       </form>
     )
   }
