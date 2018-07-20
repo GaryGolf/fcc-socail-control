@@ -12,7 +12,7 @@ export default class SearchForm extends React.PureComponent<Props, State> {
   
   constructor(props:Props) {
     super(props)
-    this.state = { url: '' };
+    this.state = { url: 'https://www.airbnb.com.au/users/show/99824610' };
   }
 
   private handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
@@ -27,17 +27,15 @@ export default class SearchForm extends React.PureComponent<Props, State> {
 
   render() {
     return (
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={this.handleFormSubmit}>
-          <input
-            className={styles.input}
-            //type="text"
-            value={this.state.url}
-            onChange={this.handleInputChange}
-          />
-          <input type="submit" /> 
-        </form>
-      </div>
+      <form className={styles.form} onSubmit={this.handleFormSubmit}>
+        <input
+          className={styles.input}
+          //type="text"
+          value={this.state.url}
+          onChange={this.handleInputChange}
+        />
+        <input type="submit" /> 
+      </form>
     )
   }
 }

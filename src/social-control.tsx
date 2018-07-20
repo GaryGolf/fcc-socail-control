@@ -1,10 +1,11 @@
 import * as React from 'react';
-// import * as styles from './index.css';
 import * as fetchJsonp from 'fetch-jsonp';
 import SearchForm from './components/search-form';
 import UserInfo from './components/user-info';
 import UserPage from './components/user-page';
 import { config } from './config';
+
+import * as styles from './social-control.css';
 
 
 interface Props {}
@@ -21,14 +22,15 @@ export default class SocialControl extends React.PureComponent<Props, State> {
   constructor(props:Props) {
     super(props)
 
+    this.parser = new DOMParser();
     this.state = { html: '' , message: null };
   }
 
-  private checkNetwork = (url:string):string => {
+  private getNetwork = (url:string):string => {
     if (!url) return null;
-    const a = document.createElement('a'); a.href = url;
-    const network = Object.keys(config).find(key => config[key].hosts.includes(a.hostname));
-    a.remove();
+
+    const { hostname } = new URL(url)
+    const network = Object.keys(config).find(key => config[key].hosts.includes(hostname));
     return network || null;
   }
 
@@ -45,7 +47,7 @@ export default class SocialControl extends React.PureComponent<Props, State> {
 
   private handleFormSubmit = (url:string) => {
 
-    this.network = this.checkNetwork(url)
+    this.network = this.getNetwork(url)
     if(!this.network) return;
 
     this.setState({ message: '...loading' })
@@ -66,13 +68,15 @@ export default class SocialControl extends React.PureComponent<Props, State> {
 
   render() {
     const { html, message } = this.state;
-    const info = null;
+    const info = this.extractUserInfo(html);
     return (
-      <div>
+      <div className={styles.container}>
         <h1 style={{position: 'fixed', padding: '3rem',bottom:0, right:0}}>{message}</h1>
         <UserPage html={html}/>
-        <SearchForm onSubmit={this.handleFormSubmit}/>
-        <UserInfo info={info}/>
+        <div className={styles.plate}>
+          <SearchForm onSubmit={this.handleFormSubmit}/>
+          <UserInfo info={info}/>
+        </div>
       </div>
     )
   }
