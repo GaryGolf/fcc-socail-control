@@ -72,13 +72,14 @@ export default class SocialControl extends React.PureComponent<Props, State> {
   render() {
     const { html, message } = this.state;
     const info = this.extractUserInfo(html);
+    const wait = message == '...loading';
     const btnStyle = [ styles.confirm , !info ? styles.hidden : ''].join(' ');
     return (
       <div className={styles.container}>
-        <h1 style={{position: 'fixed', padding: '3rem',bottom:0, right:0}}>{message}</h1>
+        <h1 style={{position: 'fixed', margin:'3rem', bottom:0, right:0}}>{message}</h1>
         <UserPage html={html}/>
         <div className={styles.plate}>
-          <SearchForm onSubmit={this.handleFormSubmit}/>
+          <SearchForm wait={wait} onSubmit={this.handleFormSubmit}/>
           <UserInfo info={info}/>
           <button className={btnStyle}>
             I confirm this is my account
