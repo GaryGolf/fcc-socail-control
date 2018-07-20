@@ -11,10 +11,13 @@ const UserPage:React.SFC<Props>  = ({ html }) => {
 
   const handleClick = (event:React.MouseEvent<HTMLDivElement>) => event.stopPropagation();
 
+  const blob = new Blob([html], {type:'text/html'});
+  const url = window.URL.createObjectURL(blob);
+  
   return (
     <div className={styles.container}>
       <div className={styles.shield} onClick={handleClick}/>
-      <div  dangerouslySetInnerHTML={{__html:html}}/>
+      <iframe className={styles.frame} src={url}/>
     </div>
   )
 }
