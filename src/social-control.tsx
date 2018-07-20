@@ -42,7 +42,15 @@ export default class SocialControl extends React.PureComponent<Props, State> {
     const xml = parser.parseFromString(html, 'text/html');
 
     return Object.keys(extractor)
-      .reduce((acc, key) => ({ ...acc, [key]:extractor[key](xml) }), { network });
+      .reduce((acc, key) => { 
+        let value = '...';
+        try {
+          value = extractor[key](xml);
+        } catch(error) {
+          console.log(error)
+        }
+        return { ...acc, [key]:value }
+      }, { network });
   }
 
   private handleFormSubmit = (url:string) => {
