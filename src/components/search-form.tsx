@@ -31,13 +31,11 @@ export default class SearchForm extends React.PureComponent<Props, State> {
         <form className={styles.form} onSubmit={this.handleFormSubmit}>
           <input
             className={styles.input}
-            type="text"
+            //type="text"
             value={this.state.url}
             onChange={this.handleInputChange}
           />
-          <button>
-            Submit
-          </button>
+          <input type="submit" /> 
         </form>
       </div>
     )
